@@ -19,5 +19,15 @@ namespace CryptoWorkerService.Mapper
                 PriceChangePercetage = dto.PriceChangePercetage,
             };
         }
+        public static void UpdateEntity(this Coin entity, CoinDTO dto)
+        {
+            entity.Name = dto.Name;
+            entity.CurrentPrice = dto.CurrentPrice;
+            entity.HighestPrice24h = dto.HighestPrice24h;
+            entity.LowestPrice24h = dto.LowestPrice24h;
+            entity.LastUpdate = dto.LastUpdate;
+            entity.MarketCap = dto.MarketCap;
+            entity.PriceChangePercetage = dto.PriceChangePercetage;
+        }
     }
 }

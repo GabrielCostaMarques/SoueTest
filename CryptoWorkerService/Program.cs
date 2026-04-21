@@ -1,6 +1,7 @@
 using CryptoWorkerService;
 using CryptoWorkerService.Domain.Contracts;
 using CryptoWorkerService.Infrastructure;
+using CryptoWorkerService.Infrastructure.Repository;
 using CryptoWorkerService.Service;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<AppDbContext>(
 );
 
 builder.Services.AddScoped<ICoinWorkerService, CoinWorkerService>();
+builder.Services.AddScoped<ICoinRepository, CoinRepository>();
 
 builder.Services.AddHttpClient<ICoinWorkerService, CoinWorkerService>(client =>
 {

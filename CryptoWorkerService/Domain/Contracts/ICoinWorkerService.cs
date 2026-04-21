@@ -2,7 +2,7 @@
 {
     public interface ICoinWorkerService
     {
-         public Task InsertCoin(CancellationToken cancellationToken = default);
+         public Task UpdateCoins(CancellationToken cancellationToken = default);
        
     }
 }

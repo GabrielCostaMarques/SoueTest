@@ -1,70 +1,38 @@
 ﻿using CryptoWorkerService.Domain.Contracts;
 using CryptoWorkerService.Domain.Entity;
-using CryptoWorkerService.Infrastructure;
 using CryptoWorkerService.Mapper;
-using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Json;
 
 namespace CryptoWorkerService.Service
 {
-    public class CoinWorkerService(HttpClient httpClient, AppDbContext context) : ICoinWorkerService
+    public class CoinWorkerService(HttpClient httpClient, ICoinRepository coinRepository) : ICoinWorkerService
     {
         private readonly HttpClient _httpClient = httpClient;
-        private readonly AppDbContext _context = context;
-        private readonly DbSet<Coin> _dbSet = context.Set<Coin>();
+        private readonly ICoinRepository _coinRepository = coinRepository;
 
-
-        //public async Task<List<Coin>> GetCoinMarketById(string id)
-        //{
-        //    var data = await _httpClient.GetFromJsonAsync<List<CoinDTO>>($"/coins/markets?vs_currency=usd&ids={id}");
-
-        //    return data.ToList(;
-        //}
-
-        public async Task InsertCoin(CancellationToken cancellationToken)
+        public async Task UpdateCoins(CancellationToken cancellationToken)
         {
-            var data = await _httpClient.GetFromJsonAsync<List<CoinDTO>>("coins/markets?vs_currency=usd&ids=bitcoin,ethereum");
+            var data = await _httpClient
+                .GetFromJsonAsync<List<CoinDTO>>("coins/markets?vs_currency=usd");
 
-            var ids = data.Select(x => x.Id).ToList();
+            var existingCoins = await _coinRepository.CheckExistDb(data, cancellationToken);
 
-            var existingCoins = await _dbSet
-                .Where(c => ids.Contains(c.Id)).ToListAsync();
+            var newCoins = new List<Coin>();
 
             foreach (var item in data)
             {
-                var existId = existingCoins.FirstOrDefault(c => c.Id == item.Id);
-
-                if (existId is null)
+                if (existingCoins.TryGetValue(item.Id, out var coinDb))
                 {
-                    _dbSet.Add(new Coin
-                    {
-                        Id = item.Id,
-                        CurrentPrice = item.CurrentPrice,
-                        HighestPrice24h = item.HighestPrice24h,
-                        LowestPrice24h = item.LowestPrice24h,
-                        LastUpdate = item.LastUpdate,
-                        MarketCap = item.MarketCap,
-                        Name = item.Name,
-                        PriceChangePercetage = item.PriceChangePercetage,
-                    });
+                    coinDb.UpdateEntity(item);
                 }
                 else
                 {
-                    existId.CurrentPrice = item.CurrentPrice;
-                    existId.HighestPrice24h = item.HighestPrice24h;
-                    existId.LowestPrice24h = item.LowestPrice24h;
-                    existId.LastUpdate = item.LastUpdate;
-                    existId.MarketCap = item.MarketCap;
-                    existId.Name = item.Name;
-                    existId.PriceChangePercetage = item.PriceChangePercetage;
+                    newCoins.Add(item.ToEntity());
                 }
             }
 
-
-            await _context.SaveChangesAsync();
-
-
-
+            await _coinRepository.Insert(newCoins, cancellationToken);
+            await _coinRepository.CommitAsync(cancellationToken);
         }
 
     }

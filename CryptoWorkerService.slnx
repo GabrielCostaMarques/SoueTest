@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="CryptoApiService/CryptoApiService.csproj" Id="c3985fcb-cfb7-404a-870c-3165fedbdb9e" />
   <Project Path="CryptoWorkerService/CryptoWorkerService.csproj" />
 </Solution>

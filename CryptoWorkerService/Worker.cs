@@ -6,7 +6,6 @@ namespace CryptoWorkerService
     {
 
         private readonly IServiceScopeFactory _scopeFactory = scopeFactory;
-
        
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -19,7 +18,7 @@ namespace CryptoWorkerService
                 {
                     logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
                 }
-                await coinWorkerService.InsertCoin();
+                await coinWorkerService.UpdateCoins();
 
                 await Task.Delay(60000, stoppingToken);
             }
