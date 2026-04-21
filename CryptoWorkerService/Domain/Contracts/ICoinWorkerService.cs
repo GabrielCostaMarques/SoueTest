@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CryptoWorkerService.Domain.Contracts
+﻿namespace CryptoWorkerService.Domain.Contracts
 {
     public interface ICoinWorkerService
     {
-        public 
+         public Task InsertCoin(CancellationToken cancellationToken = default);
+       
     }
 }
