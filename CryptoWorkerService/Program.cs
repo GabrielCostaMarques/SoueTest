@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 var builder = Host.CreateApplicationBuilder(args);
 builder.Services.AddHostedService<Worker>();
 
-
 var connectionString = "User ID=root;Password=Lagavi30!;Host=localhost;Port=5432;Database=coins;Pooling=true;Connection Lifetime=0;";
 builder.Services.AddDbContext<AppDbContext>(
     options =>

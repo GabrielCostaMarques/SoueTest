@@ -22,8 +22,6 @@ namespace CryptoWorkerService.Infrastructure.Repository
             return coinsDb.ToDictionary(x => x.Id);
         }
 
-
-
         public async Task CommitAsync(CancellationToken cancellationToken)
         {
             await context.SaveChangesAsync(cancellationToken);
