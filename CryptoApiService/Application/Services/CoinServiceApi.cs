@@ -15,5 +15,14 @@ namespace CryptoApiService.Application.Services
 
             return Result.Success(dtoList);   
         }
+        public async Task<Result<CoinDTO>> GetCoinsByIdAsync(string id, CancellationToken cancellationToken)
+        {
+            var coins = await _coinRepositoryApi.GetById(id,cancellationToken);
+            var dtoList = coins.ToDTO();
+
+            return Result.Success(dtoList);   
+        }
+
+
     }
 }

@@ -16,6 +16,13 @@ namespace CryptoApiService.Controllers
         {
             var result = await _coinServiceApi.GetAllCoinsAsync(cancellationToken);
 
+            return Ok(result);
+        }
+        [HttpGet("id")]
+        public async Task<IActionResult> GetById(string id, CancellationToken cancellationToken)
+        {
+            var result = await _coinServiceApi.GetCoinsByIdAsync(id, cancellationToken);
+
             return Ok(result);  
         }
     }

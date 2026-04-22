@@ -1,0 +1,62 @@
+services:
+  dbproduct:
+    image: postgres:latest
+    container_name: dbproduct
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: Lagavi30!
+      POSTGRES_DB: Coins
+      POOLING: "true"
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+    volumes:
+          - user_data:/var/lib/postgresql/data
+    healthcheck:
+          test: ["CMD-SHELL", "pg_isready -U root"]
+          interval: 10s
+          timeout: 5s
+          retries: 5
+    ports:
+        - "5432:5432"
+    user: root
+
+    networks:
+      - app-network
+      
+  api-coins:
+    build: 
+      context: .                                    
+      dockerfile: ./CryptoApiService/Dockerfile
+    container_name: api-coins
+    ports:
+      - "8080:8080"
+    environment:
+      - ConnectionStrings__DefaultConnectionString=User ID=root;Password=Lagavi30!;Host=dbproduct;Database=coins;Pooling=true;MinPoolSize=0;MaxPoolSize=100;Connection Lifetime=0;
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - dbproduct
+    networks:
+      - app-network
+
+  worker-coins:
+    build: 
+      context: .                                    
+      dockerfile: ./CryptoWorkerService/Dockerfile
+    container_name: worker-coins
+    ports:
+      - "8081:8081"
+    environment:
+      - ConnectionStrings__DefaultConnectionString=User ID=root;Password=Lagavi30!;Host=dbproduct;Database=coins;Pooling=true;MinPoolSize=0;MaxPoolSize=100;Connection Lifetime=0;
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - dbproduct
+    networks:
+      - app-network
+
+
+networks:
+  app-network:
+    driver: bridge
+    
+volumes:
+  user_data:

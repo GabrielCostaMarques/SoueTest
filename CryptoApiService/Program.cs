@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICoinRepositoryApi, CoinRepositoryApi>();
 builder.Services.AddScoped<ICoinServiceApi, CoinServiceApi>();
 
-var connectionString = "User ID=root;Password=Lagavi30!;Host=localhost;Port=5432;Database=coins;Pooling=true;Connection Lifetime=0;";
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
 builder.Services.AddDbContext<AppDbContext>(
     options =>
         options.UseNpgsql(
@@ -26,7 +26,15 @@ builder.Services.AddDbContext<AppDbContext>(
            )
 );
 
+
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

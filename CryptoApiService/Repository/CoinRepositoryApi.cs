@@ -1,7 +1,6 @@
 ﻿using CryptoApiService.Domain.Contracts;
 using CryptoWorkerService.Domain.Entity;
 using CryptoWorkerService.Infrastructure;
-using CryptoWorkerService.Service;
 using Microsoft.EntityFrameworkCore;
 
 namespace CryptoApiService.Repository
@@ -15,9 +14,9 @@ namespace CryptoApiService.Repository
             return await _dbSet.AsNoTracking().ToListAsync(cancellationToken);
         }
 
-        public Task<Coin> GetById(string id, CancellationToken cancellationToken)
+        public async Task<Coin> GetById(string id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _dbSet.FirstOrDefaultAsync(c => c.Id == id);
         }
     }
 }
