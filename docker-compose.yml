@@ -49,7 +49,8 @@ services:
       - ConnectionStrings__DefaultConnectionString=User ID=root;Password=Lagavi30!;Host=dbproduct;Database=coins;Pooling=true;MinPoolSize=0;MaxPoolSize=100;Connection Lifetime=0;
       - ASPNETCORE_ENVIRONMENT=Development
     depends_on:
-      - dbproduct
+      dbproduct:
+        condition: service_healthy
     networks:
       - app-network
 

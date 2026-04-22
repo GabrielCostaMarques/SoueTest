@@ -1,7 +1,8 @@
-﻿using CryptoWorkerService.Domain.Contracts;
-using CryptoWorkerService.Domain.Entity;
-using CryptoWorkerService.Mapper;
+﻿using CryptoService.Domain.Contracts;
+using CryptoService.Domain.Entity;
+using CryptoWorkerService.Contracts;
 using System.Net.Http.Json;
+using CryptoService.Infrastructure.Mapper;
 
 namespace CryptoWorkerService.Service
 {

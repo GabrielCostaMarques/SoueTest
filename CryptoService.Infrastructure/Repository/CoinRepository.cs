@@ -1,9 +1,9 @@
-﻿using CryptoWorkerService.Domain.Contracts;
-using CryptoWorkerService.Domain.Entity;
+﻿using CryptoService.Domain.Contracts;
+using CryptoService.Domain.Entity;
 using CryptoWorkerService.Service;
 using Microsoft.EntityFrameworkCore;
 
-namespace CryptoWorkerService.Infrastructure.Repository
+namespace CryptoService.Infrastructure.Repository
 {
     public class CoinRepository(AppDbContext context) : ICoinRepository
     {
@@ -14,10 +14,10 @@ namespace CryptoWorkerService.Infrastructure.Repository
             await _dbSet.AddRangeAsync(coin);
         }
 
-        public async Task<Dictionary<string,Coin>> CheckExistDb(List<CoinDTO> data, CancellationToken cancellationToken)
+        public async Task<Dictionary<string, Coin>> CheckExistDb(List<CoinDTO> data, CancellationToken cancellationToken)
         {
             var ids = data.Select(x => x.Id).ToList();
-            var coinsDb=await _dbSet.Where(c => ids.Contains(c.Id)).ToListAsync(cancellationToken);
+            var coinsDb = await _dbSet.Where(c => ids.Contains(c.Id)).ToListAsync(cancellationToken);
 
             return coinsDb.ToDictionary(x => x.Id);
         }

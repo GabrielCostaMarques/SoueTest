@@ -1,5 +1,5 @@
-using CryptoWorkerService.Domain.Contracts;
-using CryptoWorkerService.Infrastructure;
+using CryptoService.Infrastructure;
+using CryptoWorkerService.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace CryptoWorkerService

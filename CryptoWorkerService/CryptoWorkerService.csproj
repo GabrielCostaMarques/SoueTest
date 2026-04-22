@@ -24,4 +24,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CryptoService.Domain\CryptoService.Domain.csproj" />
+    <ProjectReference Include="..\CryptoService.Infrastructure\CryptoService.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>

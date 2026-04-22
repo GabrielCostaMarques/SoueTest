@@ -1,5 +1,4 @@
-﻿using CryptoWorkerService.Domain.Entity;
-using CryptoWorkerService.Service;
+﻿using CryptoService.Domain.Entity;
 
 namespace CryptoApiService.Domain.Contracts
 {

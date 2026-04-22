@@ -1,6 +1,6 @@
 ﻿using CryptoApiService.Domain.Contracts;
-using CryptoWorkerService.Domain.Entity;
-using CryptoWorkerService.Infrastructure;
+using CryptoService.Domain.Entity;
+using CryptoService.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace CryptoApiService.Repository

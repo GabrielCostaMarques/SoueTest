@@ -1,7 +1,8 @@
+using CryptoService.Domain.Contracts;
+using CryptoService.Infrastructure;
+using CryptoService.Infrastructure.Repository;
 using CryptoWorkerService;
-using CryptoWorkerService.Domain.Contracts;
-using CryptoWorkerService.Infrastructure;
-using CryptoWorkerService.Infrastructure.Repository;
+using CryptoWorkerService.Contracts;
 using CryptoWorkerService.Service;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(
     options =>
         options.UseNpgsql(
             connectionString,
-            o => o.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)
+            o => o.EnableRetryOnFailure(5, TimeSpan.FromSeconds(5), null)
            )
 );
 

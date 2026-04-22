@@ -25,10 +25,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\CryptoWorkerService\CryptoWorkerService.csproj">
-			<Private>false</Private>
-			<ExcludeAssets>contentFiles</ExcludeAssets>
-		</ProjectReference>
+	  <ProjectReference Include="..\CryptoService.Infrastructure\CryptoService.Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using Ardalis.Result;
 using CryptoApiService.Domain.Contracts;
-using CryptoWorkerService.Mapper;
 using CryptoWorkerService.Service;
+using CryptoService.Infrastructure.Mapper;
 
 namespace CryptoApiService.Application.Services
 {

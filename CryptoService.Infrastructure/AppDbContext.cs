@@ -1,7 +1,7 @@
-﻿using CryptoWorkerService.Domain.Entity;
+﻿using CryptoService.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 
-namespace CryptoWorkerService.Infrastructure
+namespace CryptoService.Infrastructure
 {
     public class AppDbContext(DbContextOptions options) : DbContext(options)
     {
@@ -15,5 +15,4 @@ namespace CryptoWorkerService.Infrastructure
         }
     }
 
-    
 }

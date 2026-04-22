@@ -1,7 +1,7 @@
-﻿using CryptoWorkerService.Domain.Entity;
+﻿using CryptoService.Domain.Entity;
 using CryptoWorkerService.Service;
 
-namespace CryptoWorkerService.Domain.Contracts
+namespace CryptoService.Domain.Contracts
 {
     public interface ICoinRepository
     {

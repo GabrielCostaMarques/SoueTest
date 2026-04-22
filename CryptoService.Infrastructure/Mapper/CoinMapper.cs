@@ -1,7 +1,10 @@
-﻿using CryptoWorkerService.Domain.Entity;
+﻿using CryptoService.Domain.Entity;
 using CryptoWorkerService.Service;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace CryptoWorkerService.Mapper
+namespace CryptoService.Infrastructure.Mapper
 {
     public static class CoinMapper
     {

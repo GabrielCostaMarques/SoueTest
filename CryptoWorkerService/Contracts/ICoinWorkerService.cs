@@ -1,4 +1,4 @@
-﻿namespace CryptoWorkerService.Domain.Contracts
+﻿namespace CryptoWorkerService.Contracts
 {
     public interface ICoinWorkerService
     {

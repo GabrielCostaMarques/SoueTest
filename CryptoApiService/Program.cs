@@ -1,8 +1,7 @@
 using CryptoApiService.Application.Services;
 using CryptoApiService.Domain.Contracts;
 using CryptoApiService.Repository;
-using CryptoWorkerService.Infrastructure;
-using CryptoWorkerService.Infrastructure.Repository;
+using CryptoService.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,12 +28,6 @@ builder.Services.AddDbContext<AppDbContext>(
 
 
 var app = builder.Build();
-
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate();
-}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

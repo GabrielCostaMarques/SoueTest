@@ -1,4 +1,4 @@
-﻿namespace CryptoWorkerService.Domain.Entity
+﻿namespace CryptoService.Domain.Entity
 {
     public class Coin
     {

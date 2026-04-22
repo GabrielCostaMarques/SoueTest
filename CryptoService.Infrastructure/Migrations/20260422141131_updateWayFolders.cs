@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CryptoWorkerService.Migrations
+namespace CryptoService.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initalMigration : Migration
+    public partial class updateWayFolders : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,12 +17,11 @@ namespace CryptoWorkerService.Migrations
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    CurrentPrice = table.Column<decimal>(type: "numeric", nullable: false),
-                    Currency = table.Column<string>(type: "text", nullable: false),
-                    MarketCap = table.Column<decimal>(type: "numeric", nullable: false),
-                    PriceChangePercetage = table.Column<decimal>(type: "numeric", nullable: false),
-                    HighestPrice24h = table.Column<decimal>(type: "numeric", nullable: false),
-                    LowestPrice24h = table.Column<decimal>(type: "numeric", nullable: false),
+                    CurrentPrice = table.Column<decimal>(type: "numeric", nullable: true),
+                    MarketCap = table.Column<decimal>(type: "numeric", nullable: true),
+                    PriceChangePercetage = table.Column<decimal>(type: "numeric", nullable: true),
+                    HighestPrice24h = table.Column<decimal>(type: "numeric", nullable: true),
+                    LowestPrice24h = table.Column<decimal>(type: "numeric", nullable: true),
                     LastUpdate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
