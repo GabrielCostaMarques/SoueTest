@@ -5,12 +5,11 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: Lagavi30!
-      POSTGRES_DB: Coins
       POOLING: "true"
       PGDATA: /var/lib/postgresql/data/pgdata
 
     volumes:
-          - user_data:/var/lib/postgresql/data
+          - coins_data:/var/lib/postgresql/data
     healthcheck:
           test: ["CMD-SHELL", "pg_isready -U root"]
           interval: 10s
@@ -34,7 +33,8 @@ services:
       - ConnectionStrings__DefaultConnectionString=User ID=root;Password=Lagavi30!;Host=dbproduct;Database=coins;Pooling=true;MinPoolSize=0;MaxPoolSize=100;Connection Lifetime=0;
       - ASPNETCORE_ENVIRONMENT=Development
     depends_on:
-      - dbproduct
+      dbproduct:
+        condition: service_healthy
     networks:
       - app-network
 
@@ -60,4 +60,4 @@ networks:
     driver: bridge
     
 volumes:
-  user_data:
+  coins_data:

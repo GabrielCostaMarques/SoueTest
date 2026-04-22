@@ -1,31 +1,14 @@
-using CryptoApiService.Application.Services;
-using CryptoApiService.Domain.Contracts;
-using CryptoApiService.Repository;
-using CryptoService.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+using CryptoApiService.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddScoped<ICoinRepositoryApi, CoinRepositoryApi>();
-builder.Services.AddScoped<ICoinServiceApi, CoinServiceApi>();
-
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
-builder.Services.AddDbContext<AppDbContext>(
-    options =>
-        options.UseNpgsql(
-            connectionString,
-            o => o.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)
-           )
-);
-
-
+builder.Services.AddDbConfiguration(builder.Configuration);
+builder.Services.AddApplicationConfiguration();
 
 var app = builder.Build();
 
@@ -37,9 +20,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

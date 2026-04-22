@@ -15,6 +15,7 @@ namespace CryptoWorkerService
             {
                 using var scope = _scopeFactory.CreateScope();
                 var coinWorkerService = scope.ServiceProvider.GetRequiredService<ICoinWorkerService>();
+
                 var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
                 db.Database.Migrate();
 
