@@ -34,13 +34,15 @@ Principais objetivos:
 O projeto adota uma **arquitetura em camadas**, integrando um robô RPA com uma API REST:
 
 - **RPA**: responsável por consumir a API pública de criptomoedas e atualizar os dados no banco.
+- **Infrastructure**: responsável pelo compartilhamento de informações do banco para outras camadas
+- **Domain**: responsável pelo compartilhamento de informações de regra de negócio para outras camadas
 - **API REST**: expõe os dados persistidos para consulta externa via endpoints documentados.
 
 ---
 
 ## Funcionalidades Principais
 
-- **Extração Automatizada**: o robô consulta a API pública de criptomoedas e mantém os dados atualizados.
+- **Extração Automatizada**: o robô consulta a API pública de criptomoedas a cada 60 segundos e mantém os dados atualizados.
 - **Persistência de Dados**: informações salvas e atualizadas no PostgreSQL via Entity Framework Core.
 - **Consulta de Moedas**: listagem de todas as criptomoedas disponíveis.
 - **Consulta por ID**: busca de uma criptomoeda específica pelo seu identificador.
@@ -85,3 +87,10 @@ O projeto adota uma **arquitetura em camadas**, integrando um robô RPA com uma 
 ## Documentação
 
 - **Swagger / OpenAPI:** a documentação interativa da API está disponível após a execução, acessível via `/swagger`. Permite explorar e testar os endpoints diretamente pelo navegador.
+
+
+## Possíveis melhorias
+- Implementar testes automatizados (unitários e de integração) para validar a comunicação com a API e garantir a estabilidade das chamadas externas.
+- Adicionar um mecanismo de monitoramento do Worker, enviando seu status de execução (com base nos logs ou checkpoints) para a API, permitindo acompanhamento de sucesso, falhas e tempo de processamento.
+- Estruturar logs mais detalhados e centralizados (ex: correlação por request), facilitando debug e observabilidade.
+
